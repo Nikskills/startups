@@ -13,6 +13,8 @@ import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { loginAction } from "../../actions/login"
 import { useState } from "react"
+import { FormSuccess } from "./auth/form-success"
+import { FormError } from "./auth/form-error"
 
 export function LoginForm({
   className,
@@ -20,6 +22,7 @@ export function LoginForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const [error, setError] = useState<string>("")
   const [pending, setPending] = useState(false)
+  const [success, setSuccess] = useState("")
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -33,7 +36,10 @@ export function LoginForm({
         <form action={async (formData) => {
             setPending(true)
             try {
-              await loginAction(formData)
+              const res = await loginAction(formData)
+              if (res.success) {
+                setSuccess(res.success)
+              }
             } catch (e) {
               setError(e instanceof Error ? e.message : 'Something went wrong')
             } finally {
@@ -64,6 +70,8 @@ export function LoginForm({
                 </div>
                 <Input id="password" name="password" type="password" required />
               </div>
+              <FormSuccess message={success}/>
+              <FormError message={error}/>
               <Button type="submit" disabled={pending} className="w-full">
                 {pending ? "Logging in..." : "Login"}
               </Button>

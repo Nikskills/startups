@@ -2,7 +2,7 @@
 import { signIn } from "next-auth/react"
 import { AuthError } from "next-auth"
 
-export async function loginAction(formData: FormData): Promise<void> {
+export async function loginAction(formData: FormData){
   try {
     const email = formData.get('email')
     const password = formData.get('password')
@@ -17,10 +17,11 @@ export async function loginAction(formData: FormData): Promise<void> {
       redirect: true,
       callbackUrl: '/'
     })
+    return {success: "User created successfully"}
   } catch (error) {
     if (error instanceof AuthError) {
-      throw new Error('Invalid credentials')
+      return {error: 'Invalid credentials'}
     }
-    throw error
+    return {error: "An error occurred"}
   }
 }
