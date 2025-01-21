@@ -1,3 +1,4 @@
+'use client'
 import { cn } from "../lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -9,13 +10,16 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { signIn } from "../../auth"
 import Link from "next/link"
+import { loginAction } from "../../actions/login"
+import { useState } from "react"
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const [error, setError] = useState<string>("")
+  const [pending, setPending] = useState(false)
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -26,16 +30,24 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={async (formData) => {
-            'use server'
-            await signIn('credentials', formData)
+        <form action={async (formData) => {
+            setPending(true)
+            try {
+              await loginAction(formData)
+            } catch (e) {
+              setError(e instanceof Error ? e.message : 'Something went wrong')
+            } finally {
+              setPending(false)
+            }
           }}>
+          {error && (<div>{error}</div>)}
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
+                  name="email"
                   placeholder="yourname@example.com"
                   required
                 />
@@ -50,10 +62,10 @@ export function LoginForm({
                     Forgot your password?
                   </Link>
                 </div>
-                <Input id="password" type="password" required />
+                <Input id="password" name="password" type="password" required />
               </div>
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" disabled={pending} className="w-full">
+                {pending ? "Logging in..." : "Login"}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">

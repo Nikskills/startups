@@ -48,11 +48,11 @@ export function RegisterForm({ className, ...props }: RegisterFormProps) {
                 setSuccess("")
                 setError(res.error)
             }
-            if(res.succes) {
+            if(res.success) {
                 setLoading(false)
                 setError("")
-                setSuccess(res.succes)
-                setTimeout(() => { router.push('/')}, 2000 )
+                setSuccess(res.success)
+                setTimeout(() => { router.push('/login')}, 2000 )
             }
             setLoading(false)
         })

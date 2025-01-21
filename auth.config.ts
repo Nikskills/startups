@@ -4,24 +4,27 @@ import prisma from "@/lib/prisma";
 import { compare } from 'bcrypt-ts'
 import { signInSchema } from "@/lib/zod";
 
-export default { 
+export default {
+    pages: {
+        signIn: '/login',
+    },
     providers: [
         Credentials({
             async authorize(credentials) {
-                const validatedData = await signInSchema.parseAsync(credentials)
+                const validatedData = await signInSchema.parse(credentials)
                 const {email, password} = validatedData
                 const user = await prisma.user.findFirst({
-                    where: {email: email}
+                    where: { email }
                 })
-                if (!user || !user.password || user.email) {
+                if (!user || !user.password) {  // Fixed condition
                     return null
                 }
                 const passwordsMatch = await compare(password, user.password)
                 if (!passwordsMatch) {
                     return null
                 }
-                return validatedData
+                return user  
             }
         })
-    ] 
+    ]
 } satisfies NextAuthConfig
