@@ -7,10 +7,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Startup } from "@/types/types";
+import { Button } from "./ui/button";
+import Link from "next/link";
 export const StartupCard = (startup: Startup) => {
-    const { title, description, author, views, category, image} = startup;
+    const { slug, title, description, author, views, category, image} = startup;
   return (
-    <div>
+    <div className="">
       <Card>
         <CardHeader>
           <CardTitle>{title}</CardTitle>
@@ -20,9 +22,10 @@ export const StartupCard = (startup: Startup) => {
           <p>{author}</p>
           <p>{views}</p>
           <p>{image}</p>
+          <p>{category}</p>
         </CardContent>
         <CardFooter>
-          <p>{category}</p>
+          <Link href={`/startups/${slug}`}><Button className="font-bold">Details</Button></Link>
         </CardFooter>
       </Card>
     </div>

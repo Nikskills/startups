@@ -70,3 +70,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  .pink-container {
+    @apply bg-pink-700 flex flex-col h-full justify-center p-5 text-center font-bold gap-10
+  }
+}

@@ -7,7 +7,7 @@ export type User = {
 }
 
 export type Startup = {
-    id: string;
+    id: number;
     title: string;
     slug: string;
     description: string;
