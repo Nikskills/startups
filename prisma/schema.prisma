@@ -13,7 +13,7 @@ model Startup {
   slug String @unique
   description String
   author String
-  views String
+  views Int
   category String
   pitch String
   image String
