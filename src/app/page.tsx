@@ -2,8 +2,8 @@ import { HeroSection } from "@/components/herosection";
 import { Startups } from "@/components/startups";
 
 
-export default async function Home() {
-
+export default async function Home({searchParams}: {searchParams: Promise<{query?: string}>}) {
+  const query = (await searchParams).query
 
   return (
     <div className="w-full">
@@ -11,7 +11,7 @@ export default async function Home() {
         <HeroSection />
       </div>
       <div>
-        <Startups/>
+        <Startups query={query}/>
       </div>
     </div>
   )

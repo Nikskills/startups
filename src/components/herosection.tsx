@@ -1,6 +1,6 @@
 import { Input } from "./ui/input"
 
-export const HeroSection = () => {
+export const HeroSection = ({query}: {query?: string}) => {
     return (
         <div className="pink-container">
             <div className="flex w-full ">
@@ -15,14 +15,17 @@ export const HeroSection = () => {
                         <p>Submit Ideas, Vote on Pitches and Get Noticed in Virtual Competitions</p>
                     </div>
                     <div className="my-5 flex flex-row justify-center">
-                        <form className="flex flex-row rounded-lg border-4 border-solid border-black text-gray-500 bg-white w-full">
+                        <form action={'/'} className="flex flex-row rounded-lg border-4 border-solid border-black text-gray-500 bg-white w-full">
                             <Input
-                                placeholder="Search Startups"
-                                name="searchbar"
+                                defaultValue={query}
+                                name="query"
                                 id="searchbar"
                                 className="border-none"
                             />
-                            <div>Icon</div>
+                            <div className="flex gap-2">
+                                {query}
+                                <button type="submit">S</button>
+                            </div>
                         </form>
                     </div>
                 </div>

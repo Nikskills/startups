@@ -12,7 +12,7 @@ export type Startup = {
     slug: string;
     description: string;
     author: string;
-    views: string
+    views: number
     category: string;
     pitch: string;
     image: string;
