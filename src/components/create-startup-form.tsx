@@ -192,7 +192,6 @@ export const CreateStartupForm = () => {
                   type="https://example.com/image.jpg"
                   placeholder="https://example.com/image.jpg"
                   {...field}
-                  required
                 />
               </FormControl>
               <FormDescription>

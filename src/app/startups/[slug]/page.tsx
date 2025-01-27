@@ -33,15 +33,18 @@ const StartupDetailsPage = async({params}: {params: Promise<{slug: string}>}) =>
     return (
         <div>
             <div className="pink-container">
-                <div className="bg-yellow rounded-lg font-bold">date</div>
-                <div className="bg-black text-white p-4 mx-auto text-center text-5xl my-5">{title}</div>
+                <div className="bg-black text-white p-6 mx-auto text-center text-5xl my-5">{title}</div>
                 <div className="text-white">{description}</div>
             </div>
-            <div>{image}</div>
+            <div>{image ? 
+                (<div className="flex justify-center">{image}</div>): 
+                (<div></div>)
+                }
+            </div>
             <div className="flex w-full my-5">
                 <div className="flex-1"></div>
-                <div className="w-3/4 flex flex-row justify-between">
-                    <div className="py-1">Door: {author}</div>
+                <div className="w-3/5 flex flex-row justify-between">
+                    <div className="py-1">Geschreven door: {author}</div>
                     <div className="flex flex-row gap-5">
                         <div className="bg-purple-300 px-2 py-1 rounded-lg">{category}</div>
                         <div className="py-1">{views} views</div>
@@ -51,9 +54,9 @@ const StartupDetailsPage = async({params}: {params: Promise<{slug: string}>}) =>
             </div>
             <div className="flex w-full my-5">
                 <div className="flex-1"></div>
-                <div className="w-3/4 flex flex-col gap-2">
-                    <p className="text-xl font-bold">Pitch Details</p>
-                    <p>{pitch}</p>
+                <div className="w-3/5 flex flex-col gap-2">
+                    <p className="text-2xl font-bold">Pitch Details</p>
+                    <p className="text-xl">{pitch}</p>
                 </div>
                 <div className="flex-1"></div>
                 

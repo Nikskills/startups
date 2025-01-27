@@ -23,7 +23,7 @@ export const Startups = async() => {
     return (
         <div className="mx-auto w-3/4 mt-5">
             <div className="text-3xl font-bold">All Startups</div>
-            <div className="flex flex-col gap-8 row-start-2 items-center sm:items-start m-10">
+            <div className="flex flex-row gap-8 row-start-2 items-center sm:items-start m-10">
                 {startups.length > 0 ? (
                 startups.map((startup: Startup) => (
                     <div key={startup.id}>
