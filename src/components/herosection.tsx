@@ -1,6 +1,11 @@
+'use client'
 import { Input } from "./ui/input"
-
-export const HeroSection = ({query}: {query?: string}) => {
+import { useRouter, useSearchParams } from "next/navigation"
+export const HeroSection = () => {
+    const router = useRouter()
+    const resetSearch = () => {router.push('/')}
+    const searchParams = useSearchParams()
+    const query = searchParams.get('query') || ''
     return (
         <div className="pink-container">
             <div className="flex w-full ">
@@ -20,11 +25,17 @@ export const HeroSection = ({query}: {query?: string}) => {
                                 defaultValue={query}
                                 name="query"
                                 id="searchbar"
-                                className="border-none"
+                                className="border-none focus-visible:ring-0"
                             />
                             <div className="flex gap-2">
-                                {query}
-                                <button type="submit">S</button>
+                                {query &&  (<button
+                                        type="button"
+                                        onClick={resetSearch}
+                                        className="px-2 hover:text-black"
+                                    >
+                                        ✕
+                                    </button>)}
+                                <button type="submit" className=" mx-2 px-2">Search</button>
                             </div>
                         </form>
                     </div>
