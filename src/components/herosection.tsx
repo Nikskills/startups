@@ -25,6 +25,7 @@ export const HeroSection = () => {
                                 defaultValue={query}
                                 name="query"
                                 id="searchbar"
+                                placeholder="Beyonce"
                                 className="border-none focus-visible:ring-0"
                             />
                             <div className="flex gap-2">
