@@ -5,7 +5,7 @@ export async function POST(
   request: Request,
   { params }: { params: { slug: string } }
 ) {
-  const { slug } = params;
+  const { slug } = (await params);
 
   if (!slug) {
     return NextResponse.json({ error: "Slug is required" }, { status: 400 });
