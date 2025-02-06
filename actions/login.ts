@@ -6,7 +6,6 @@ export async function loginAction(formData: FormData){
   try {
     const email = formData.get('email')
     const password = formData.get('password')
-    console.log(email, password)
     if (!email || !password) {
       throw new Error('Missing credentials')
     }
@@ -17,7 +16,7 @@ export async function loginAction(formData: FormData){
       redirect: true,
       callbackUrl: '/'
     })
-    return {success: "User created successfully"}
+    return {success: "User logged in successfully"}
   } catch (error) {
     if (error instanceof AuthError) {
       return {error: 'Invalid credentials'}

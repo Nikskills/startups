@@ -8,12 +8,12 @@ datasource db {
 }
 
 model Startup {
-  id String @id @default(uuid())
+  id Int @id @default(autoincrement())
   title String 
-  slug String
+  slug String @unique
   description String
   author String
-  views String
+  views Int
   category String
   pitch String
   image String
